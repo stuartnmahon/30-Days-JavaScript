@@ -51,6 +51,11 @@
       border-left: 1px solid #D1E2FF;
     }
 
+    .details {
+      text-align: center;
+      font-size: 15px;
+    }
+
 
   </style>
    <!--
@@ -99,6 +104,27 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+  let lastChecked;
+
+  function handleClick(e) {
+      let inbetween = false;
+      // check if shift key down & check if checked
+      if(e.shiftKey && this.checked) {
+          checkboxes.forEach(checkbox => {
+              if(checkbox === this || checkbox === lastChecked) {
+                inbetween = !inbetween
+              }
+
+              if(inbetween) {
+                  checkbox.checked = true;
+              }
+          });
+      }
+      lastChecked = this;
+  }
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleClick));
 </script>
 </body>
 </html>
